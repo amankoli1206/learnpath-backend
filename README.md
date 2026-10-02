@@ -11,6 +11,8 @@
 
 ## About The Project
 
+**Live API Endpoint:** [https://learnpath-api-fbwn.onrender.com](https://learnpath-api-fbwn.onrender.com)
+
 The **Personal Learning Path & Skill Tracker** is a robust backend API designed to help lifelong learners track their skill development in a structured way. Users can build profiles detailing their current and desired proficiency levels, enroll in educational resources, log their learning hours, and set milestones to achieve their goals.
 
 This system provides the architectural foundation for a comprehensive educational platform, featuring modular routing, secure authentication, and a scalable database design.
