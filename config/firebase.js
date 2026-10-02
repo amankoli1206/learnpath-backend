@@ -1,7 +1,19 @@
 const admin = require('firebase-admin');
-const serviceAccount = require('../backendex-585ee-firebase-adminsdk-fbsvc-19acea5a89.json');
+let serviceAccount;
+
+try {
+  // Try to load the local JSON file
+  serviceAccount = require('../backendex-585ee-firebase-adminsdk-fbsvc-19acea5a89.json');
+} catch (error) {
+  console.log("Firebase JSON key not found (this is normal in production). Skipping Firebase auth.");
+}
 
 const initializeFirebase = () => {
+  if (!serviceAccount) {
+    console.log("Running without Firebase Admin capabilities.");
+    return;
+  }
+  
   try {
     admin.initializeApp({
       credential: admin.credential.cert(serviceAccount)
