@@ -1,104 +1,64 @@
-# API Testing Guide
+# Ultimate API Testing Guide (Thunder Client / Postman)
 
-This document contains every single API endpoint available in the Personal Learning Path & Skill Tracker. 
+This guide contains every single API endpoint in the Personal Learning Path project. 
+**Base URL:** `http://localhost:5001` (Change 5001 to 5000 if your server runs on port 5000)
 
-**Base URL:** `http://localhost:5001`
+## 1. Authentication (No Token Required)
 
-**Authentication Note:** 
-Almost all endpoints (except Register and Login) require a Bearer Token. 
-To test them in Postman or Thunder Client:
-1. Login or Register to get a `token`.
-2. Go to the **Auth** tab.
-3. Select **Bearer Token** and paste the `token` there.
-
----
-
-## 1. Authentication Endpoints
-
-### Register User
+### Register a New User
 *   **Method:** `POST`
-*   **URL:** `/api/auth/register`
-*   **Auth Required:** No
+*   **URL:** `http://localhost:5001/api/auth/register`
 *   **Body (JSON):**
     ```json
     {
-      "name": "Jane Doe",
-      "email": "jane@example.com",
+      "name": "Test User",
+      "email": "test@example.com",
       "password": "password123"
     }
     ```
 
-### Login User
+### Login
 *   **Method:** `POST`
-*   **URL:** `/api/auth/login`
-*   **Auth Required:** No
+*   **URL:** `http://localhost:5001/api/auth/login`
 *   **Body (JSON):**
     ```json
     {
-      "email": "jane@example.com",
+      "email": "test@example.com",
       "password": "password123"
     }
     ```
+*(Copy the `token` from the response and paste it into the **Auth -> Bearer Token** tab in Thunder Client for all requests below!)*
 
 ---
 
-## 2. Skills Endpoints
+## 2. Skills & Profiles (Token Required)
 
-### Get All Skills
-*   **Method:** `GET`
-*   **URL:** `/api/skills`
-*   **Auth Required:** Yes
-
-### Get Single Skill
-*   **Method:** `GET`
-*   **URL:** `/api/skills/:id` (Replace `:id` with actual Skill ID)
-*   **Auth Required:** Yes
-
-### Create Skill
+### Add a Global Skill to Database
 *   **Method:** `POST`
-*   **URL:** `/api/skills`
-*   **Auth Required:** Yes
+*   **URL:** `http://localhost:5001/api/skills`
 *   **Body (JSON):**
     ```json
     {
-      "name": "JavaScript",
-      "category": "Programming",
-      "description": "Web language"
+      "name": "React",
+      "category": "Frontend"
     }
     ```
 
-### Update Skill
+### Get All Global Skills
+*   **Method:** `GET`
+*   **URL:** `http://localhost:5001/api/skills`
+
+### Update Personal Skill Profile
 *   **Method:** `PUT`
-*   **URL:** `/api/skills/:id`
-*   **Auth Required:** Yes
-*   **Body (JSON):**
-    ```json
-    {
-      "description": "Updated description here"
-    }
-    ```
-
-### Delete Skill
-*   **Method:** `DELETE`
-*   **URL:** `/api/skills/:id`
-*   **Auth Required:** Yes
-
----
-
-## 3. Skill Profiles Endpoints
-
-### Update User's Skill Profile
-*   **Method:** `PUT`
-*   **URL:** `/api/skill-profiles`
-*   **Auth Required:** Yes
+*   **URL:** `http://localhost:5001/api/skill-profiles`
 *   **Body (JSON):**
     ```json
     {
       "skillProfile": [
         {
-          "skill": "<skill_id_here>",
+          "skill": "<paste_skill_id_here>",
           "currentLevel": "Beginner",
-          "desiredLevel": "Expert"
+          "targetLevel": "Advanced"
         }
       ]
     }
@@ -106,145 +66,128 @@ To test them in Postman or Thunder Client:
 
 ---
 
-## 4. Resources Endpoints
+## 3. Resources & Enrollments (Token Required)
+
+### Create a Learning Resource (Course/Article)
+*   **Method:** `POST`
+*   **URL:** `http://localhost:5001/api/resources`
+*   **Body (JSON):**
+    ```json
+    {
+      "title": "Mastering React",
+      "type": "course",
+      "url": "https://react.dev"
+    }
+    ```
 
 ### Get All Resources
 *   **Method:** `GET`
-*   **URL:** `/api/resources`
-*   **Auth Required:** Yes
-
-### Get Single Resource
-*   **Method:** `GET`
-*   **URL:** `/api/resources/:id`
-*   **Auth Required:** Yes
-
-### Create Resource
-*   **Method:** `POST`
-*   **URL:** `/api/resources`
-*   **Auth Required:** Yes
-*   **Body (JSON):**
-    ```json
-    {
-      "title": "React for Beginners",
-      "type": "course",
-      "url": "https://example.com/react"
-    }
-    ```
-
----
-
-## 5. Enrollments Endpoints
-
-### Get User's Enrollments
-*   **Method:** `GET`
-*   **URL:** `/api/enrollments`
-*   **Auth Required:** Yes
+*   **URL:** `http://localhost:5001/api/resources`
 
 ### Enroll in a Resource
 *   **Method:** `POST`
-*   **URL:** `/api/enrollments`
-*   **Auth Required:** Yes
+*   **URL:** `http://localhost:5001/api/enrollments`
 *   **Body (JSON):**
     ```json
     {
-      "resource": "<resource_id_here>"
+      "resource": "<paste_resource_id_here>"
     }
     ```
 
+### View My Enrollments
+*   **Method:** `GET`
+*   **URL:** `http://localhost:5001/api/enrollments`
+
 ---
 
-## 6. Learning Logs Endpoints
+## 4. Learning Logs (Token Required)
 
-### Get User's Learning Logs
-*   **Method:** `GET`
-*   **URL:** `/api/learning-logs`
-*   **Auth Required:** Yes
-
-### Create a Learning Log
+### Log Study Time
 *   **Method:** `POST`
-*   **URL:** `/api/learning-logs`
-*   **Auth Required:** Yes
+*   **URL:** `http://localhost:5001/api/learning-logs`
 *   **Body (JSON):**
     ```json
     {
-      "resource": "<resource_id_here>",
-      "skill": "<skill_id_here>",
-      "hoursSpent": 3,
-      "notes": "Finished the intro module"
+      "enrollment": "<paste_enrollment_id_here>",
+      "hoursSpent": 2,
+      "notes": "Learned about React Hooks."
     }
     ```
 
+### View My Learning Logs
+*   **Method:** `GET`
+*   **URL:** `http://localhost:5001/api/learning-logs`
+
 ---
 
-## 7. Milestones Endpoints
-
-### Get User's Milestones
-*   **Method:** `GET`
-*   **URL:** `/api/milestones`
-*   **Auth Required:** Yes
+## 5. Milestones (Goals) (Token Required)
 
 ### Create a Milestone
 *   **Method:** `POST`
-*   **URL:** `/api/milestones`
-*   **Auth Required:** Yes
+*   **URL:** `http://localhost:5001/api/milestones`
 *   **Body (JSON):**
     ```json
     {
-      "title": "Finish Backend Course",
-      "targetDate": "2026-11-01"
+      "title": "Finish React Course",
+      "description": "Complete all modules by weekend",
+      "targetDate": "2026-12-31"
+    }
+    ```
+
+### View My Milestones
+*   **Method:** `GET`
+*   **URL:** `http://localhost:5001/api/milestones`
+
+### Update Milestone Status
+*   **Method:** `PUT`
+*   **URL:** `http://localhost:5001/api/milestones/<paste_milestone_id_here>`
+*   **Body (JSON):**
+    ```json
+    {
+      "isCompleted": true
     }
     ```
 
 ---
 
-## 8. Progress & Share Endpoints
+## 6. Progress & Sharing (Token Required)
 
-### Get Progress Data for a Specific User
+### Get Total Study Progress (Math Calculation)
 *   **Method:** `GET`
-*   **URL:** `/api/progress/user/:id` (Replace `:id` with User ID)
-*   **Auth Required:** Yes
+*   **URL:** `http://localhost:5001/api/progress`
 
-### Share Progress
+### Share Progress Report with Mentor
 *   **Method:** `POST`
-*   **URL:** `/api/share`
-*   **Auth Required:** Yes
+*   **URL:** `http://localhost:5001/api/share`
 *   **Body (JSON):**
     ```json
     {
       "mentorEmail": "mentor@example.com",
-      "message": "Check out my latest progress!"
+      "message": "Hey! Check out my study hours this week."
     }
     ```
 
 ---
 
-## 9. Admin & Notifications Endpoints
+## 7. Advanced & Admin Routes (Token Required)
 
-### Admin View All Resources
+### AI Skill Gap Analysis
 *   **Method:** `GET`
-*   **URL:** `/api/admin/resources`
-*   **Auth Required:** Yes
+*   **URL:** `http://localhost:5001/api/analysis/skill-gap`
+*   **Description:** Analyzes your skill profile and suggests what to learn next.
 
-### Send Milestone Notification
+### Admin: Get All Platform Resources
+*   **Method:** `GET`
+*   **URL:** `http://localhost:5001/api/admin/resources`
+
+### Admin: Send Push Notification (Firebase)
 *   **Method:** `POST`
-*   **URL:** `/api/notifications/send`
-*   **Auth Required:** Yes
+*   **URL:** `http://localhost:5001/api/notifications/send`
 *   **Body (JSON):**
     ```json
     {
-      "milestoneId": "<milestone_id_here>",
-      "message": "Congratulations on hitting your goal!"
+      "token": "<firebase_device_token_here>",
+      "title": "New Course Available!",
+      "body": "Check out the new Advanced React course."
     }
     ```
-
-### AI Skill Gap Analysis (Bonus Feature)
-*   **Method:** `GET`
-*   **URL:** `/api/analysis/skill-gap`
-*   **Auth Required:** Yes
-
-
-### AI Skill Gap Analysis (Bonus Feature)
-*   **Method:** `GET`
-*   **URL:** `/api/analysis/skill-gap`
-*   **Auth Required:** Yes
-

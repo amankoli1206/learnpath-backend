@@ -3,7 +3,7 @@ const Enrollment = require('../models/Enrollment');
 exports.createEnrollment = async (req, res) => {
   try {
     // req.user.id comes from the auth middleware
-    const enrollment = await Enrollment.create({ ...req.body, user: req.user.id });
+    const enrollment = await Enrollment.create({ ...req.body, user: req.user.id });  // spread operator 
     res.status(201).json(enrollment);
   } catch (error) {
     res.status(400).json({ error: error.message });

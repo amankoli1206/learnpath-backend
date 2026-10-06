@@ -5,11 +5,11 @@ const jwt = require('jsonwebtoken');
 exports.register = async (req, res) => {
   try {
     const { name, email, password } = req.body;
-    const hashedPassword = await bcrypt.hash(password, 10);
-    
+    const hashedPassword = await bcrypt.hash(password, 10);  // await takes time to updatet the password, that is y we use await
+
     const user = await User.create({ name, email, password: hashedPassword });
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET || 'secret', { expiresIn: '1d' });
-    
+
     res.status(201).json({ user, token });
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -20,11 +20,11 @@ exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
-    
+
     if (!user || !(await bcrypt.compare(password, user.password))) {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
-    
+
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET || 'secret', { expiresIn: '1d' });
     res.json({ user, token });
   } catch (error) {

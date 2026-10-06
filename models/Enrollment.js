@@ -14,7 +14,7 @@ const enrollmentSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ['enrolled', 'in-progress', 'completed'],
+    enum: ['enrolled', 'in-progress', 'completed'],   // choice
     default: 'enrolled'
   },
   progressPercentage: {
