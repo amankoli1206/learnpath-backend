@@ -236,3 +236,15 @@ To test them in Postman or Thunder Client:
       "message": "Congratulations on hitting your goal!"
     }
     ```
+
+### AI Skill Gap Analysis (Bonus Feature)
+*   **Method:** `GET`
+*   **URL:** `/api/analysis/skill-gap`
+*   **Auth Required:** Yes
+
+
+### AI Skill Gap Analysis (Bonus Feature)
+*   **Method:** `GET`
+*   **URL:** `/api/analysis/skill-gap`
+*   **Auth Required:** Yes
+

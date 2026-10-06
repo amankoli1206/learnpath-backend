@@ -17,6 +17,7 @@ const progressRoutes = require('./routes/progressRoutes');
 const shareRoutes = require('./routes/shareRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const notificationRoutes = require('./routes/notificationRoutes');
+const analysisRoutes = require('./routes/analysisRoutes');
 
 const app = express();
 const server = http.createServer(app);
@@ -36,6 +37,7 @@ app.use('/api/progress', progressRoutes);
 app.use('/api/share', shareRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/notifications', notificationRoutes);
+app.use('/api/analysis', analysisRoutes);
 
 connectDB();
 initializeFirebase();
