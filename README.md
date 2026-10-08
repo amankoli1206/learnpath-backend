@@ -6,7 +6,6 @@
   <img src="https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB" />
   <img src="https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=JSON%20web%20tokens&logoColor=white" alt="JWT" />
 </p>
-
 <br />
 
 ## About The Project
@@ -28,7 +27,7 @@ This system provides the architectural foundation for a comprehensive educationa
   <li><b>Mentorship Sharing:</b> Capabilities to share learning progress with peers and mentors.</li>
 </ul>
 
-## Tech Stack
+## Tech Stacks
 
 <ul>
   <li><b>Runtime:</b> <code>Node.js</code></li>
