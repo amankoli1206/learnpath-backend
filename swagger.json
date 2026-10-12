@@ -1,0 +1,310 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Personal Learning Path and Skill Tracker API",
+    "version": "1.0.0",
+    "description": "Comprehensive API Documentation for the Personal Learning Path backend."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5001",
+      "description": "Local server"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "paths": {
+    "/api/auth/register": {
+      "post": {
+        "summary": "Register a new user",
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "email": { "type": "string" },
+                  "password": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": { "201": { "description": "Created" } }
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "summary": "Login a user",
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": { "type": "string" },
+                  "password": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
+    "/api/skills": {
+      "get": {
+        "summary": "Get all global skills",
+        "responses": { "200": { "description": "OK" } }
+      },
+      "post": {
+        "summary": "Add a new global skill",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "category": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": { "201": { "description": "Created" } }
+      }
+    },
+    "/api/skill-profiles": {
+      "put": {
+        "summary": "Update user skill profile",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "skillProfile": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "skill": { "type": "string" },
+                        "currentLevel": { "type": "string" },
+                        "targetLevel": { "type": "string" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
+    "/api/resources": {
+      "get": {
+        "summary": "Get all resources",
+        "responses": { "200": { "description": "OK" } }
+      },
+      "post": {
+        "summary": "Create a new resource",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": { "type": "string" },
+                  "type": { "type": "string" },
+                  "url": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": { "201": { "description": "Created" } }
+      }
+    },
+    "/api/enrollments": {
+      "get": {
+        "summary": "Get all enrollments for the user",
+        "responses": { "200": { "description": "OK" } }
+      },
+      "post": {
+        "summary": "Enroll in a resource",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "resource": { "type": "string", "description": "The MongoDB ID of the resource" }
+                }
+              }
+            }
+          }
+        },
+        "responses": { "201": { "description": "Created" } }
+      }
+    },
+    "/api/learning-logs": {
+      "get": {
+        "summary": "Get all learning logs",
+        "responses": { "200": { "description": "OK" } }
+      },
+      "post": {
+        "summary": "Add a learning log",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "enrollment": { "type": "string", "description": "MongoDB ID of the enrollment" },
+                  "hoursSpent": { "type": "number" },
+                  "notes": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": { "201": { "description": "Created" } }
+      }
+    },
+    "/api/milestones": {
+      "get": {
+        "summary": "Get all milestones",
+        "responses": { "200": { "description": "OK" } }
+      },
+      "post": {
+        "summary": "Create a milestone",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": { "type": "string" },
+                  "description": { "type": "string" },
+                  "targetDate": { "type": "string", "format": "date" }
+                }
+              }
+            }
+          }
+        },
+        "responses": { "201": { "description": "Created" } }
+      }
+    },
+    "/api/milestones/{id}": {
+      "put": {
+        "summary": "Update milestone status",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "isCompleted": { "type": "boolean" }
+                }
+              }
+            }
+          }
+        },
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
+    "/api/progress": {
+      "get": {
+        "summary": "Get total study progress statistics",
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
+    "/api/analysis/skill-gap": {
+      "get": {
+        "summary": "Get AI skill gap analysis based on profile",
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
+    "/api/share": {
+      "post": {
+        "summary": "Share progress report via email logic",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "mentorEmail": { "type": "string" },
+                  "message": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
+    "/api/admin/resources": {
+      "get": {
+        "summary": "Admin route to get all resources",
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
+    "/api/notifications/send": {
+      "post": {
+        "summary": "Send push notification via Firebase",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "token": { "type": "string" },
+                  "title": { "type": "string" },
+                  "body": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": { "200": { "description": "OK" } }
+      }
+    }
+  }
+}

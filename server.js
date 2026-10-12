@@ -4,6 +4,8 @@ const express = require('express');
 const cors = require('cors');
 const http = require('http');
 const { Server } = require('socket.io');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
 const connectDB = require('./config/db');
 const { initializeFirebase } = require('./config/firebase');
 const authRoutes = require('./routes/authRoutes');
@@ -38,6 +40,7 @@ app.use('/api/share', shareRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/analysis', analysisRoutes);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 connectDB();
 initializeFirebase();
