@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:5001/api';
+const API_URL = window.location.protocol.startsWith('http') ? '/api' : 'http://localhost:5001/api';
 
 const els = {
   authScreen: document.getElementById('auth-screen'),
