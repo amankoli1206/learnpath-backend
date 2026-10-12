@@ -110,9 +110,16 @@ The system can be further improved by adding:
 *   Admin dashboard for platform-wide analytics.
 *   Gamification (badges and streaks based on Learning Logs).
 
-# 11. Conclusion
+# 11. Project Links & Deployment
+*   **Live Application (Frontend & API on Vercel):** https://learnpath-backend-snowy.vercel.app
+*   **Interactive Swagger API Documentation:** https://learnpath-backend-snowy.vercel.app/api-docs
+*   **Backend Live API (Render):** https://learnpath-api-fbwn.onrender.com
+*   **GitHub Repository:** https://github.com/amankoli1206/learnpath-backend
+
+# 12. Conclusion
 The Personal Learning Path and Skill Tracker API demonstrates the practical use of modern backend development concepts in building a functional, scalable application.
 
 The project successfully combines Node.js, Express, MongoDB, JWT Authentication, and MVC architecture to provide a comprehensive system for managing enrollments, tracking study hours, and evaluating skill gaps.
 
 Ultimately, the project provides practical experience in designing RESTful APIs, securing data, and seamlessly connecting a complex backend to a responsive frontend interface.
+

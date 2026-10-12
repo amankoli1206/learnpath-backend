@@ -10,7 +10,10 @@
 
 ## About The Project
 
-**Live API Endpoint:** [https://learnpath-api-fbwn.onrender.com](https://learnpath-api-fbwn.onrender.com)
+- **Live Application (Frontend & API on Vercel):** [https://learnpath-backend-snowy.vercel.app](https://learnpath-backend-snowy.vercel.app)
+- **Interactive Swagger API Docs:** [https://learnpath-backend-snowy.vercel.app/api-docs](https://learnpath-backend-snowy.vercel.app/api-docs)
+- **Backend API (Render):** [https://learnpath-api-fbwn.onrender.com](https://learnpath-api-fbwn.onrender.com)
+- **GitHub Repository:** [https://github.com/amankoli1206/learnpath-backend](https://github.com/amankoli1206/learnpath-backend)
 
 The **Personal Learning Path & Skill Tracker** is a robust backend API designed to help lifelong learners track their skill development in a structured way. Users can build profiles detailing their current and desired proficiency levels, enroll in educational resources, log their learning hours, and set milestones to achieve their goals.
 
